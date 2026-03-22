@@ -138,3 +138,19 @@ LOGIN_REDIRECT_URL = 'main:index'
 LOGIN_URL = 'user:login'
 
 LOGOUT_REDIRECT_URL = 'main:index'
+
+# HTML sanitize
+
+ALLOWED_HTML_TAGS = {
+    'p', 'br', 'hr', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'b', 'strong', 'i', 'em', 'u', 's', 'strike', 'del', 'ins',
+    'sup', 'sub', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre',
+    'span', 'div', 'mark', 'small', 'big', 'abbr', 'dfn', 'address', 'time'
+}
+
+ALLOWED_HTML_ATTRIBUTES = {
+    'a': {'href', 'title', 'target', 'rel'},
+    '*': {'class', 'id', 'lang'}
+}
+
+ALLOWED_URL_SCHEMES = {'http', 'https', 'mailto'}

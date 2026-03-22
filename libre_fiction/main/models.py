@@ -1,6 +1,8 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django_nh3.models import Nh3TextField
 
 
 User = get_user_model()
@@ -38,7 +40,13 @@ class Chapter(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(_('Title'), max_length=255)
-    content = models.TextField(_('Content'))
+    content = Nh3TextField(
+        _('Content'),
+        allowed_tags=settings.ALLOWED_HTML_TAGS,
+        allowed_attributes=settings.ALLOWED_HTML_ATTRIBUTES,
+        url_schemes=settings.ALLOWED_URL_SCHEMES,
+        strip_comments=True,
+    )
     order = models.PositiveIntegerField(_('Order'), default=0)
     created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)

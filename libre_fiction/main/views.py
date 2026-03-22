@@ -36,12 +36,15 @@ class BookDetailView(DetailView):
         context['chapters'] = chapters
 
         chapter_id = self.kwargs.get('chapter_id')
+        is_first_page = (chapter_id is None)
+
         if chapter_id:
             current_chapter = get_object_or_404(chapters, id=chapter_id)
         else:
             current_chapter = chapters.first()
 
         context['chapter'] = current_chapter
+        context['is_first_page'] = is_first_page
 
         previous_chapter = next_chapter = None
         if current_chapter:
