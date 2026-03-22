@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Kalissa";
+    src: url("../fonts/KalissaRegular_0.otf") format("truetype");
+}
+
+.text-logo {
+    font-family: "Kalissa";
+    font-size: x-large;
+}

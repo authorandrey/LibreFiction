@@ -1,0 +1,36 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a href="{% url "main:index" %}" class="navbar-brand text-logo">
+        <img src="{% static 'img/logo.svg' %}" alt="logo" class="d-inline-block align-center rounded" width="40px" height="40px">
+        Libre Fiction
+      </a>
+      {% with view_name=request.resolver_match.view_name %}
+        <ul class="navbar-nav flex-row">
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <form action="{% url 'user:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link">
+                  <img src="{% static 'img/exit_white.svg' %}" alt="exit" style="width: 20px;height: 20px">
+                  Выйти
+                </button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'user:login' %}" class="nav-link">
+                <img src="{% static 'img/enter_white.svg' %}" alt="enter" style="width: 20px;height: 20px">
+                Войти
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      {% endwith %}
+    </div>
+  </nav>
+</header>

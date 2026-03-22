@@ -1,0 +1,22 @@
+# Data bases
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+libre_fiction/db.sqlite3
+
+# Environment
+venv/
+.env
+
+# Python
+__pycache__/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+
+# Temporary files
+*.tmp
+*.bak

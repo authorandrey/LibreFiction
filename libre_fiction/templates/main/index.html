@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block title %}LibreFiction{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">{% trans "Все книги" %}</h1>
+
+  {% if book_list %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for book in book_list %}
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text text-muted">
+                {% trans "Автор: " %} {{ book.author.username }}
+              </p>
+              <p class="card-text">{{ book.description|truncatechars:100 }}</p>
+            </div>
+            <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+              <small class="text-muted">
+                {% trans "Лайков: " %} {{ book.likes_count }} | {% trans "Просмотров: " %} {{ book.views_count }}
+              </small>
+              <a href="{% url 'main:detail' book.id %}" class="btn btn-sm btn-primary">{% trans "Читать" %}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if is_paginated %}
+      {% bootstrap_pagination page_obj %}
+    {% endif %}
+  {% else %}
+    <p class="text-center">{% trans "Книг пока нет" %}</p>
+  {% endif %}
+</div>
+{% endblock content %}

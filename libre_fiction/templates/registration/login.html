@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class="col d-flex justify-content-center my-3">
+  <div class="card">
+    <div class="card-header">
+      <h3>{% trans "Войти в систему" %}</h3>
+    </div>
+    <div class="card-body">
+      <form action="{% url 'user:login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">{% trans "Войти" %}</button>
+      </form>
+      <div class="text-center">
+        <a href="{% url 'user:register' %}" class="nav-link">{% trans "Регистрация" %}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
